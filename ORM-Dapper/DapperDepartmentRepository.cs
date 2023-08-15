@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.Common;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,11 +19,12 @@ namespace ORM_Dapper
 
         public IEnumerable<Department> GetAllDepartments()
         {
-            return _conn.Query<Department>("Select * From departments");
+            return _conn.Query<Department>("Select * From Departments");
         }
-        public void InsertDepartment(string name)
+        public void InsertDepartment(string newDepartmentName)
         {
-            _conn.Execute("Insert int departments (Name) VALUES (@name)", new {name = name});
+            _conn.Execute("INSERT INTO DEPARTMENTS (Name) VALUES (@departmentName);",
+             new { departmentName = newDepartmentName });
         }
     }
 }
